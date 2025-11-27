@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Darshan — Photography & Video | Bookings</title>
+  <meta name="description" content="Darshan — Video Editor & Photographer. Packages, booking, and contact." />
+  <style>
+    :root{--bg:#ffffff;--card:#ffffff;--muted:#6b7280;--accent:#0ea5a4;--glass:rgba(255,255,255,0.6);--shadow:0 6px 20px rgba(16,24,40,0.06);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#f8fafc 0%,#ffffff 100%);color:#0f172a;line-height:1.45}
+    .container{max-width:1100px;margin:28px auto;padding:0 20px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#dbeafe,#c7f9f9);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+    .logo svg{width:30px;height:30px;opacity:0.95}
+    h1.site-title{font-size:20px;margin:0}
+    p.tag{margin:0;color:var(--muted);font-size:13px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:18px}
+    .hero-card{background:var(--card);padding:28px;border-radius:14px;box-shadow:var(--shadow)}
+    .hero h2{font-size:30px;margin:0 0 8px}
+    .hero p{margin:0 0 18px;color:var(--muted)}
+    .buttons{display:flex;gap:12px}
+    .btn{padding:11px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-outline{background:transparent;border:1px solid #e6eef0;color:var(--accent)}
+    .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
+    .packages{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .pkg{border-radius:12px;padding:18px;background:linear-gradient(180deg,#ffffff,#fbfdff);border:1px solid #eef2f7}
+    .price{font-size:20px;font-weight:700;margin-bottom:10px}
+    .list{margin:0;padding-left:18px;color:var(--muted);font-size:14px}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .thumb{height:180px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#eef2ff,#fff7ed);color:var(--muted);font-weight:700;border:1px dashed #e6edf2}
+    .booking{margin-top:20px}
+    form .row{display:flex;gap:10px;margin-bottom:10px}
+    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef0}
+    textarea{min-height:110px}
+    .muted{color:var(--muted);font-size:13px}
+    footer{margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px;text-align:center}
+    @media (max-width:980px){.hero{grid-template-columns:1fr}.packages{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.packages{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.logo{width:46px;height:46px}.hero h2{font-size:22px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L18 7h3a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V8a1 1 0 011-1z" stroke="#075985" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h1 class="site-title">Darshan</h1>
+          <p class="tag">Video Editor & Photographer — Bookings & Packages</p>
+        </div>
+      </div>
+      <nav>
+        <button class="btn btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</button>
+        <button class="btn btn-primary" onclick="openBooking()">Book Now</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card card">
+        <h2>Book a shoot or order an edit — fast and professional.</h2>
+        <p>I provide event photography, product shoots, and video editing (reels, YouTube, promos). Transparent packages and easy booking.</p>
+
+        <div class="packages">
+          <div class="pkg">
+            <h3>Basic Shoot</h3>
+            <div class="price">₹2,499</div>
+            <ul class="list"><li>1 hour on-location</li><li>30 edited photos</li><li>Digital delivery (48 hrs)</li></ul>
+            <div style="margin-top:10px"><button class="btn btn-primary" onclick="preselect('Basic Shoot','₹2,499')">Book Basic</button></div>
+          </div>
+
+          <div class="pkg">
+            <h3>Event Package</h3>
+            <div class="price">₹6,999</div>
+            <ul class="list"><li>4 hours coverage</li><li>150 edited photos</li><li>1 highlight video (up to 3 mins)</li></ul>
+            <div style="margin-top:10px"><button class="btn btn-primary" onclick="preselect('Event Package','₹6,999')">Book Event</button></div>
+          </div>
+
+          <div class="pkg">
+            <h3>Editing Only</h3>
+            <div class="price">₹999</div>
+            <ul class="list"><li>Up to 3 mins edit</li><li>Color grading</li><li>1 revision</li></ul>
+            <div style="margin-top:10px"><button class="btn btn-primary" onclick="preselect('Editing Only','₹999')">Order Edit</button></div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+          <button class="btn btn-primary" onclick="openBooking()">Start Booking</button>
+          <button class="btn btn-outline" onclick="window.location='#portfolio'">View Portfolio</button>
+          <div style="margin-left:auto;color:var(--muted);font-size:13px">Fast response via WhatsApp</div>
+        </div>
+
+      </div>
+
+      <aside>
+        <div class="card" style="padding:18px;">
+          <h3 style="margin-top:0">Why choose Darshan?</h3>
+          <ul style="color:var(--muted);padding-left:18px"><li>Clean, natural color grading</li><li>Fast turnaround</li><li>Clear pricing — no hidden fees</li></ul>
+          <div style="margin-top:12px"><strong>Contact</strong>
+            <p class="muted" style="margin:6px 0">WhatsApp: <a href="https://wa.me/919313196779" target="_blank" rel="noopener">+91 93131 96779</a></p>
+            <p class="muted">Email: <a href="mailto:chopdadarshan133@gmail.com">chopdadarshan133@gmail.com</a></p></div>
+        </div>
+
+        <div class="card" style="margin-top:14px;padding:12px;text-align:center"><div style="font-size:14px;color:var(--muted)">Client testimonial</div><div style="margin-top:8px;font-weight:700">"Amazing work — delivered fast!"</div><div style="font-size:13px;color:var(--muted);margin-top:6px">— Client, Mumbai</div></div>
+      </aside>
+    </section>
+
+    <section id="portfolio">
+      <h2 style="margin-top:30px">Portfolio</h2>
+      <p class="muted">Selected photography & video thumbnails — click any item to open a larger preview. Client galleries are password-protected above.</p>
+
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-outline" onclick="filterGallery('all')">All</button><button class="btn btn-outline" onclick="filterGallery('photo')">Photography</button><button class="btn btn-outline" onclick="filterGallery('video')">Video</button><button class="btn btn-outline" onclick="filterGallery('client')">Client Galleries</button></div>
+
+      <div id="galleryGrid" class="gallery" style="margin-top:16px">
+        <div class="thumb" data-type="photo" onclick="openPreview('Photo 1','photo','/')">Photo 1</div>
+        <div class="thumb" data-type="photo" onclick="openPreview('Photo 2','photo','/')">Photo 2</div>
+        <div class="thumb" data-type="photo" onclick="openPreview('Photo 3','photo','/')">Photo 3</div>
+        <div class="thumb" data-type="photo" onclick="openPreview('Photo 4','photo','/')">Photo 4</div>
+        <div class="thumb" data-type="photo" onclick="openPreview('Photo 5','photo','/')">Photo 5</div>
+        <div class="thumb" data-type="photo" onclick="openPreview('Photo 6','photo','/')">Photo 6</div>
+        <div class="thumb" data-type="video" onclick="openPreview('Reel 1','video','/')">Reel 1</div>
+        <div class="thumb" data-type="video" onclick="openPreview('Reel 2','video','/')">Reel 2</div>
+        <div class="thumb" data-type="video" onclick="openPreview('Promo 1','video','/')">Promo 1</div>
+      </div>
+
+      <div id="lightbox" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.75);z-index:1200">
+        <div style="width:94%;max-width:900px;background:white;border-radius:12px;padding:14px;box-shadow:0 30px 60px rgba(2,6,23,0.5)">
+          <div style="display:flex;justify-content:space-between;align-items:center"><strong id="lightboxTitle">Preview</strong><div><button onclick="downloadCurrent()" class="btn btn-outline" style="margin-right:8px">Download</button><button onclick="closeLightbox()" style="background:transparent;border:0;font-size:18px;cursor:pointer">✕</button></div></div>
+          <div id="lightboxBody" style="margin-top:12px;color:var(--muted);min-height:320px;display:flex;align-items:center;justify-content:center"></div>
+          <div id="lightboxMeta" style="margin-top:10px;color:var(--muted);font-size:13px"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about"><h2 style="margin-top:30px">About</h2><div class="card" style="margin-top:10px;padding:18px"><p style="margin:0;color:var(--muted)">Hi — I'm Darshan. I specialise in event photography and short-form video editing. I keep things simple: clear communication, fast delivery, and editing that enhances the story. Available for local bookings and remote editing jobs.</p></div></section>
+
+    <section id="contact"><h2 style="margin-top:30px">Contact & Booking</h2><div class="card booking"><form id="bookingForm" onsubmit="submitBooking(event)"><div class="row"><input type="text" id="name" placeholder="Your name" required /><input type="tel" id="phone" placeholder="Phone (WhatsApp)" required /></div><div class="row"><input type="email" id="email" placeholder="Email (optional)" /><select id="service"><option value="Basic Shoot">Basic Shoot — ₹2,499</option><option value="Event Package">Event Package — ₹6,999</option><option value="Editing Only">Editing Only — ₹999</option></select></div><div style="margin-bottom:10px"><input type="date" id="date" /></div><div style="margin-bottom:10px"><textarea id="notes" placeholder="Brief details (location, duration, special requests)"></textarea></div><div style="display:flex;gap:10px;align-items:center"><button type="submit" class="btn btn-primary">Send Booking Request</button><button type="button" class="btn btn-outline" onclick="openWhatsApp()">Message on WhatsApp</button><div style="margin-left:auto;color:var(--muted);font-size:13px">Response within 24 hrs</div></div></form></div></section>
+
+    <footer>© Darshan — Video Editor & Photographer • Designed for quick bookings</footer>
+  </div>
+
+  <div id="modal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:1000"><div style="width:92%;max-width:880px;background:white;border-radius:12px;padding:14px;box-shadow:0 20px 40px rgba(2,6,23,0.4)"><div style="display:flex;justify-content:space-between;align-items:center"><strong id="modalTitle">Preview</strong><button onclick="closeModal()" style="background:transparent;border:0;font-size:18px;cursor:pointer">✕</button></div><div id="modalBody" style="margin-top:12px;color:var(--muted)">Placeholder preview area.</div></div></div>
+
+  <script>
+    function openBooking(){document.getElementById('contact').scrollIntoView({behavior:'smooth'})}
+    function preview(title){document.getElementById('modalTitle').innerText=title;document.getElementById('modalBody').innerText='This is a placeholder preview for '+title+'. Replace with your images or videos.';document.getElementById('modal').style.display='flex'}
+    function closeModal(){document.getElementById('modal').style.display='none'}
+    function preselect(service,price){document.getElementById('service').value=service;openBooking();window.scrollTo({top:document.getElementById('contact').offsetTop-20,behavior:'smooth'})}
+    function openWhatsApp(){
+      var phoneField=document.getElementById('phone');
+      var phone=(phoneField&&phoneField.value.trim())?phoneField.value.trim():'9313196779';
+      if(/^\d{10}$/.test(phone)) phone='91'+phone;
+      var text='Hi Darshan, I would like to book:';
+      var waLink='https://wa.me/'+encodeURIComponent(phone)+'?text='+encodeURIComponent(text);
+      var a=document.createElement('a');a.href=waLink;a.target='_blank';a.rel='noopener noreferrer';document.body.appendChild(a);a.click();a.remove();
+    }
+    function submitBooking(e){e.preventDefault();var name=document.getElementById('name').value.trim();var phone=document.getElementById('phone').value.trim();var email=document.getElementById('email').value.trim();var service=document.getElementById('service').value;var date=document.getElementById('date').value;var notes=document.getElementById('notes').value.trim();if(!name||!phone){alert('Please enter name and phone.');return}var subject=encodeURIComponent('Booking request: '+service+' — '+name);var body=encodeURIComponent('Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nService: '+service+'\nDate: '+date+'\nNotes: '+notes);var mailto='mailto:chopdadarshan133@gmail.com?subject='+subject+'&body='+body;window.location.href=mailto;setTimeout(function(){alert('Booking drafted in your email client. You can also message via WhatsApp for faster response.')},200)}
+  </script>
+
+  <style>.sticky-bar{position:fixed;right:18px;bottom:18px;background:var(--accent);color:white;padding:12px 14px;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.2);z-index:999;cursor:pointer}.quote-modal,.gallery-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:1100}.feature-card{width:92%;max-width:720px;background:white;border-radius:12px;padding:18px}.small-muted{font-size:13px;color:var(--muted)}.unlock-input{display:flex;gap:8px}</style>
+
+  <div class="sticky-bar" onclick="openQuote()">Instant Quote</div>
+  <div id="quoteModal" class="quote-modal"><div class="feature-card"><div style="display:flex;justify-content:space-between;align-items:center"><strong>Instant Quote</strong><button onclick="closeQuote()" style="background:transparent;border:0;font-size:18px;cursor:pointer">✕</button></div><div style="margin-top:12px"><label class="small-muted">Service</label><select id="qService" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef0;margin-bottom:8px"><option value="Basic Shoot">Basic Shoot</option><option value="Event Package">Event Package</option><option value="Editing Only">Editing Only</option></select><label class="small-muted">Hours / Length</label><input id="qAmount" type="number" min="1" value="1" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef0;margin-bottom:8px" /><div style="display:flex;gap:10px;align-items:center"><button class="btn btn-primary" onclick="calculateQuote()">Get Quote</button><button class="btn btn-outline" onclick="closeQuote()">Close</button></div><div id="quoteResult" style="margin-top:12px;color:var(--muted)"></div></div></div></div>
+
+  <script>
+    // add client galleries control
+    (function(){var portfolio=document.getElementById('portfolio');if(!portfolio) return;var wrapper=document.createElement('div');wrapper.className='card';wrapper.style.marginTop='14px';wrapper.innerHTML='\n      <h3 style="margin-top:0">Client Galleries (Protected)</h3>\n      <p class="small-muted">Choose a gallery, unlock with its password or request a one-time access code. You can also share the gallery link via WhatsApp.</p>\n      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">\n        <select id="gallerySelect" style="padding:10px;border-radius:8px;border:1px solid #e6eef0">\n          <option value="wedding">Wedding — (Client A)</option>\n          <option value="birthday">Birthday — (Client B)</option>\n          <option value="product">Product Shoot — (Client C)</option>\n        </select>\n        <input id="galleryPass" placeholder="Enter password" style="padding:10px;border-radius:8px;border:1px solid #e6eef0;min-width:160px" />\n        <button class="btn btn-primary" onclick="unlockGallery()">Unlock</button>\n        <button class="btn btn-outline" onclick="requestOTP()">Request One-Time Code</button>\n      </div>\n      <div style="margin-top:10px;display:flex;gap:8px;align-items:center">\n        <input id="clientPhone" placeholder="Client phone (e.g. 9198xxxx)" style="padding:10px;border-radius:8px;border:1px solid #e6eef0;min-width:160px" />\n        <button class="btn btn-primary" onclick="shareGalleryWhatsApp()">Share via WhatsApp</button>\n      </div>\n      <div id="galleryMsg" style="margin-top:10px;color:var(--muted)"></div>';portfolio.parentNode.insertBefore(wrapper,portfolio)})();
+
+    var galleryPasswords={'wedding':'Wedd@2025','birthday':'Bday@2025','product':'Prod@2025'};
+    function saveOTP(key,code,ttlSeconds){var expires=Date.now()+ttlSeconds*1000;var obj={code:code,expires:expires};sessionStorage.setItem('otp_'+key,JSON.stringify(obj))}
+    function readOTP(key){var raw=sessionStorage.getItem('otp_'+key);if(!raw) return null;try{var obj=JSON.parse(raw);if(Date.now()>obj.expires){sessionStorage.removeItem('otp_'+key);return null}return obj.code}catch(e){return null}}
+    function unlockGallery(){var sel=document.getElementById('gallerySelect');var key=sel?sel.value:'wedding';var val=document.getElementById('galleryPass').value.trim();var msg=document.getElementById('galleryMsg');if(val&&galleryPasswords[key]&&val===galleryPasswords[key]){msg.innerHTML='Access granted — opening '+sel.options[sel.selectedIndex].text+'...';openGallery(key);return}var otp=readOTP(key);if(val&&otp&&val===otp){msg.innerHTML='One-time code accepted — opening '+sel.options[sel.selectedIndex].text+'...';sessionStorage.removeItem('otp_'+key);openGallery(key);return}msg.innerHTML='Incorrect password or code. You can request a one-time code below.'}
+    function requestOTP(){var sel=document.getElementById('gallerySelect');var key=sel?sel.value:'wedding';var msg=document.getElementById('galleryMsg');var code=Math.floor(100000+Math.random()*900000).toString();saveOTP(key,code,10*60);msg.innerHTML='One-time code generated: <strong>'+code+'</strong> (valid 10 minutes). You can share it to the client via WhatsApp below.'}
+    function shareGalleryWhatsApp(){var sel=document.getElementById('gallerySelect');var key=sel?sel.value:'wedding';var phone=document.getElementById('clientPhone').value.trim();var msg=document.getElementById('galleryMsg');if(!phone){msg.innerText='Enter client phone to share via WhatsApp.';return}if(/^\d{10}$/.test(phone)) phone='91'+phone;var otp=readOTP(key);var passToShare=otp||galleryPasswords[key]||'';var galleryName=sel.options[sel.selectedIndex].text;var siteUrl=window.location.href.split('#')[0];var text='Hi! Your '+galleryName+' is ready. Open: '+siteUrl+'#portfolio | Password/Code: '+passToShare+' | Reply if any issue.';var waLink='https://wa.me/'+encodeURIComponent(phone)+'?text='+encodeURIComponent(text);var a=document.createElement('a');a.href=waLink;a.target='_blank';a.rel='noopener noreferrer';document.body.appendChild(a);a.click();a.remove();msg.innerHTML='WhatsApp share opened — message ready to send to '+phone+'.'}
+    function openGallery(key){preview('Client Gallery — '+key)}
+
+    window.unlockGallery=unlockGallery;window.requestOTP=requestOTP;window.shareGalleryWhatsApp=shareGalleryWhatsApp;
+  </script>
+
+  <script>
+    var currentPreview={type:null,title:null,url:null};
+    function filterGallery(type){var items=document.querySelectorAll('#galleryGrid .thumb');items.forEach(function(i){if(type==='all'||i.dataset.type===type){i.style.display='flex'}else{i.style.display='none'}});if(type==='client'){var pass=document.getElementById('galleryPass');if(pass){pass.scrollIntoView({behavior:'smooth'})}}}
+    function openPreview(title,type,url){currentPreview={type:type,title:title,url:url};document.getElementById('lightboxTitle').innerText=title;var body=document.getElementById('lightboxBody');body.innerHTML='';if(type==='photo'){var img=document.createElement('div');img.style.width='100%';img.style.minHeight='320px';img.style.borderRadius='8px';img.style.display='flex';img.style.alignItems='center';img.style.justifyContent='center';img.style.background='linear-gradient(135deg,#eef2ff,#fff7ed)';img.style.color='var(--muted)';img.style.fontWeight='700';img.innerText=title+' (placeholder)';body.appendChild(img)}else if(type==='video'){var vid=document.createElement('div');vid.style.width='100%';vid.style.minHeight='320px';vid.style.borderRadius='8px';vid.style.display='flex';vid.style.alignItems='center';vid.style.justifyContent='center';vid.style.background='#000';vid.style.color='#fff';vid.style.fontWeight='700';vid.innerText=title+' — video preview (placeholder)';body.appendChild(vid)}document.getElementById('lightboxMeta').innerText='Tip: Replace placeholders with your real images/videos for full preview and download.';document.getElementById('lightbox').style.display='flex'}
+    function closeLightbox(){document.getElementById('lightbox').style.display='none'}
+    function downloadCurrent(){if(!currentPreview.url||currentPreview.url==='/'){alert('This is a placeholder preview. To enable downloads, replace the placeholder with your image/video file URL in the HTML or serve the files from your host.');return}var a=document.createElement('a');a.href=currentPreview.url;a.download=(currentPreview.title||'file');document.body.appendChild(a);a.click();a.remove()}
+  </script>
+</body>
+</html>

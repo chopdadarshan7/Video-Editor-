@@ -154,7 +154,7 @@
       var phone=(phoneField&&phoneField.value.trim())?phoneField.value.trim():'9313196779';
       if(/^\d{10}$/.test(phone)) phone='91'+phone;
       var text='Hi Darshan, I would like to book:';
-      var waLink='https://wa.me/'+encodeURIComponent(phone)+'?text='+encodeURIComponent(text);
+      var waLink='https://wa.me/9313196779/Hi Darshan, I would like to book'+encodeURIComponent(phone)+'?text='+encodeURIComponent(text);
       var a=document.createElement('a');a.href=waLink;a.target='_blank';a.rel='noopener noreferrer';document.body.appendChild(a);a.click();a.remove();
     }
     function submitBooking(e){e.preventDefault();var name=document.getElementById('name').value.trim();var phone=document.getElementById('phone').value.trim();var email=document.getElementById('email').value.trim();var service=document.getElementById('service').value;var date=document.getElementById('date').value;var notes=document.getElementById('notes').value.trim();if(!name||!phone){alert('Please enter name and phone.');return}var subject=encodeURIComponent('Booking request: '+service+' — '+name);var body=encodeURIComponent('Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nService: '+service+'\nDate: '+date+'\nNotes: '+notes);var mailto='mailto:chopdadarshan133@gmail.com?subject='+subject+'&body='+body;window.location.href=mailto;setTimeout(function(){alert('Booking drafted in your email client. You can also message via WhatsApp for faster response.')},200)}
@@ -181,6 +181,17 @@
   </script>
 
   <script>
+    function openQuote(){document.getElementById('quoteModal').style.display='flex'; calculateQuote()}
+    function closeQuote(){document.getElementById('quoteModal').style.display='none'}
+    function calculateQuote(){
+      var service=document.getElementById('qService').value;
+      var amount=parseInt(document.getElementById('qAmount').value)||1;
+      var prices={'Basic Shoot':2499,'Event Package':6999,'Editing Only':999};
+      var basePrice=prices[service]||0;
+      var total=basePrice*amount;
+      document.getElementById('quoteResult').innerHTML='Estimated cost: ₹'+total.toLocaleString()+' (for '+amount+' '+ (service==='Editing Only'?'minute(s)':'hour(s)') +')';
+    }
+
     var currentPreview={type:null,title:null,url:null};
     function filterGallery(type){var items=document.querySelectorAll('#galleryGrid .thumb');items.forEach(function(i){if(type==='all'||i.dataset.type===type){i.style.display='flex'}else{i.style.display='none'}});if(type==='client'){var pass=document.getElementById('galleryPass');if(pass){pass.scrollIntoView({behavior:'smooth'})}}}
     function openPreview(title,type,url){currentPreview={type:type,title:title,url:url};document.getElementById('lightboxTitle').innerText=title;var body=document.getElementById('lightboxBody');body.innerHTML='';if(type==='photo'){var img=document.createElement('div');img.style.width='100%';img.style.minHeight='320px';img.style.borderRadius='8px';img.style.display='flex';img.style.alignItems='center';img.style.justifyContent='center';img.style.background='linear-gradient(135deg,#eef2ff,#fff7ed)';img.style.color='var(--muted)';img.style.fontWeight='700';img.innerText=title+' (placeholder)';body.appendChild(img)}else if(type==='video'){var vid=document.createElement('div');vid.style.width='100%';vid.style.minHeight='320px';vid.style.borderRadius='8px';vid.style.display='flex';vid.style.alignItems='center';vid.style.justifyContent='center';vid.style.background='#000';vid.style.color='#fff';vid.style.fontWeight='700';vid.innerText=title+' — video preview (placeholder)';body.appendChild(vid)}document.getElementById('lightboxMeta').innerText='Tip: Replace placeholders with your real images/videos for full preview and download.';document.getElementById('lightbox').style.display='flex'}

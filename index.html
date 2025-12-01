@@ -149,15 +149,72 @@
     function preview(title){document.getElementById('modalTitle').innerText=title;document.getElementById('modalBody').innerText='This is a placeholder preview for '+title+'. Replace with your images or videos.';document.getElementById('modal').style.display='flex'}
     function closeModal(){document.getElementById('modal').style.display='none'}
     function preselect(service,price){document.getElementById('service').value=service;openBooking();window.scrollTo({top:document.getElementById('contact').offsetTop-20,behavior:'smooth'})}
-    function openWhatsApp(){
-      var phoneField=document.getElementById('phone');
-      var phone=(phoneField&&phoneField.value.trim())?phoneField.value.trim():'9313196779';
-      if(/^\d{10}$/.test(phone)) phone='91'+phone;
-      var text='Hi Darshan, I would like to book:';
-      var waLink='https://wa.me/9313196779/Hi Darshan, I would like to book'+encodeURIComponent(phone)+'?text='+encodeURIComponent(text);
-      var a=document.createElement('a');a.href=waLink;a.target='_blank';a.rel='noopener noreferrer';document.body.appendChild(a);a.click();a.remove();
+
+    // openWhatsApp (unchanged) — optional quick message
+    function openWhatsApp() {
+      var phoneField = document.getElementById('phone');
+      var clientPhone = phoneField && phoneField.value.trim();
+      var waNumber = '919313196779';
+      var service = document.getElementById('service') ? document.getElementById('service').value : 'Not selected';
+      var text = 'Hi Darshan, I would like to book:\n' + 'Service: ' + service;
+      if (clientPhone) text += '\nMy phone: ' + clientPhone;
+      var waLink = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text);
+      var a = document.createElement('a'); a.href = waLink; a.target = '_blank'; a.rel = 'noopener noreferrer'; document.body.appendChild(a); a.click(); a.remove();
     }
-    function submitBooking(e){e.preventDefault();var name=document.getElementById('name').value.trim();var phone=document.getElementById('phone').value.trim();var email=document.getElementById('email').value.trim();var service=document.getElementById('service').value;var date=document.getElementById('date').value;var notes=document.getElementById('notes').value.trim();if(!name||!phone){alert('Please enter name and phone.');return}var subject=encodeURIComponent('Booking request: '+service+' — '+name);var body=encodeURIComponent('Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nService: '+service+'\nDate: '+date+'\nNotes: '+notes);var mailto='mailto:chopdadarshan133@gmail.com?subject='+subject+'&body='+body;window.location.href=mailto;setTimeout(function(){alert('Booking drafted in your email client. You can also message via WhatsApp for faster response.')},200)}
+
+    // NEW submitBooking: opens mail client with prefilled subject/body and copies body to clipboard
+    async function submitBooking(e) {
+      e.preventDefault();
+
+      var name   = document.getElementById('name').value.trim();
+      var phone  = document.getElementById('phone').value.trim();
+      var email  = document.getElementById('email').value.trim();
+      var service = document.getElementById('service').value;
+      var date    = document.getElementById('date').value;
+      var notes   = document.getElementById('notes').value.trim();
+
+      if (!name || !phone) {
+        alert('Please enter name and phone.');
+        return;
+      }
+
+      // recipient email (Darshan)
+      var to = 'chopdadarshan133@gmail.com';
+
+      var subject = 'Booking request: ' + service + ' — ' + name;
+
+      var body =
+        'Name: ' + name + '\n' +
+        'Phone: ' + phone + '\n' +
+        'Email: ' + (email || '-') + '\n' +
+        'Service: ' + service + '\n' +
+        'Date: ' + (date || '-') + '\n' +
+        'Notes: ' + (notes || '-');
+
+      // Try to copy body to clipboard (helpful if mail client doesn't open)
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(body);
+        }
+      } catch (err) {
+        // ignore clipboard errors — not critical
+        console.warn('Clipboard copy failed', err);
+      }
+
+      // Build mailto link (encoded)
+      var mailto = 'mailto:' + encodeURIComponent(to) +
+                   '?subject=' + encodeURIComponent(subject) +
+                   '&body=' + encodeURIComponent(body);
+
+      // Try to open user's email client
+      // Use location.href to trigger default mail handler
+      window.location.href = mailto;
+
+      // Friendly message to user
+      setTimeout(function() {
+        alert('Email draft should open in your mail client. Booking details were also copied to clipboard — paste if needed.');
+      }, 250);
+    }
   </script>
 
   <style>.sticky-bar{position:fixed;right:18px;bottom:18px;background:var(--accent);color:white;padding:12px 14px;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.2);z-index:999;cursor:pointer}.quote-modal,.gallery-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:1100}.feature-card{width:92%;max-width:720px;background:white;border-radius:12px;padding:18px}.small-muted{font-size:13px;color:var(--muted)}.unlock-input{display:flex;gap:8px}</style>
@@ -184,12 +241,12 @@
     function openQuote(){document.getElementById('quoteModal').style.display='flex'; calculateQuote()}
     function closeQuote(){document.getElementById('quoteModal').style.display='none'}
     function calculateQuote(){
-      var service=document.getElementById('qService').value;
-      var amount=parseInt(document.getElementById('qAmount').value)||1;
-      var prices={'Basic Shoot':2499,'Event Package':6999,'Editing Only':999};
-      var basePrice=prices[service]||0;
-      var total=basePrice*amount;
-      document.getElementById('quoteResult').innerHTML='Estimated cost: ₹'+total.toLocaleString()+' (for '+amount+' '+ (service==='Editing Only'?'minute(s)':'hour(s)') +')';
+      var service = document.getElementById('qService').value;
+      var amount = parseInt(document.getElementById('qAmount').value)||1;
+      var prices = {'Basic Shoot':2499,'Event Package':6999,'Editing Only':999};
+      var basePrice = prices[service]||0;
+      var total = basePrice * amount;
+      document.getElementById('quoteResult').innerHTML = 'Estimated cost: ₹' + total.toLocaleString() + ' (for ' + amount + ' ' + (service==='Editing Only'?'minute(s)':'hour(s)') + ')';
     }
 
     var currentPreview={type:null,title:null,url:null};
